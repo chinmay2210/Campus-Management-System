@@ -1,0 +1,57 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+
+<div class="nvb">
+  <h4>Attendance List</h4>
+  
+</div>
+
+      <table class="table tl">
+      <caption>
+        <div><a href="/download/{{st.name}}" style="color: gray;text-decoration: none;" id="downloadBtn">Download Excel</a>
+        </div>
+          <a href="/archiveCampus/{{st.name}}" style="text-decoration: none;color: gray;">Archived Campus</a>
+      </caption>
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Department</th>
+            <th scope="col">NO of Student</th>
+            <th scope="col">Present Student</th>
+            <th scope="col">Absent Student</th>
+          </tr>
+        </thead>
+        <tbody>
+     
+          {% for department_name, department_data in departments.items() %}
+          <tr>
+              <td>1</td>
+              <td>{{ department_name }}</td>
+              {% if department_data['total'] is none %}
+              <td>Not Applicable</td>
+              <td>Not Applicable</td>
+              <td>Not Applicable</td>
+              {% else %}
+              <td><a href='/download/{{st.name}}/{{department_name }}'>{{ department_data['total'] }}</a></td>
+              <td><a href='/download/{{st.name}}/{{department_name }}/present'>{{ department_data['present'] }}</a></td>
+              <td><a href='/download/{{st.name}}/{{department_name }}/absent'>{{ department_data['absent'] }}</td>
+              {% endif %}
+          </tr>
+          {% endfor %}
+          
+         
+
+         
+     
+        </tbody>
+      </table>
+   
+  <script>
+    $(document).ready(function() {
+        $("#downloadBtn").click(function() {
+            window.location.href = "/download/{{st.name}}";
+        });
+    });
+</script>
+{% endblock body  %}

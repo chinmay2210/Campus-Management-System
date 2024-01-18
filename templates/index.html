@@ -1,0 +1,65 @@
+
+{% extends 'layout.html' %}
+{% block body %}
+
+       
+        <i class="fas fa-user-cog"></i>
+      </div>
+      
+   
+      <div class="nvb">
+        <h4 class="nvb">Campus</h4>
+        {% for cam,d in zp %}
+        {% if loop.index <= 4 %}
+        
+          <div class="card nc" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">{{cam.name}}</h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary">{{cam.pack}}</h6>
+                <p class="card-text">
+                  {% if d["clg"]['total'] is none  %}
+                  <p>Campus is not Created</p>
+                  {% else %}
+                    <li>Total : {{d["clg"]['total']}}</li>
+                    <li>Present : {{d["clg"]['present']}}</li>
+                    <li>Absent : {{d["clg"]['absent']}}</li>
+                  {% endif %}
+                  
+                </p>
+                <a style="text-decoration: none;color: gray;" href="/veiwStats/{{ cam.name }}" class="card-link">View Stats</a>
+               
+              </div>
+            
+
+          </div>
+        {% endif %}
+      {% endfor %}
+      <h4 class="nvb">Upcoming Campus</h4>
+      <table class="table tl">
+        
+        <thead>
+          <tr>
+            <th scope="col">SN</th>
+            <th scope="col">Campus</th>
+            <th scope="col">Date</th>
+            <th scope="col">Packege</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i  in range(4,campus|length) %}
+          <tr>
+            <td>{{i+1}}</td>
+            <td>{{campus[i].name}}</td>
+            <td>{{campus[i].date}}</td>
+            <td>{{campus[i].pack}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+                  
+   
+
+      
+
+ 
+    {% endblock body  %}
